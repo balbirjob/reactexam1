@@ -1,23 +1,28 @@
-import logo from './logo.svg';
+// src/App.js
+import React, { useState } from 'react';
+import Sidebar from './Sidebar';
+import MainSection from './MainSection';
 import './App.css';
 
 function App() {
+  const [labels, setLabels] = useState([]);
+  const [selectedLabel, setSelectedLabel] = useState(null);
+
+  const addLabel = (newLabel) => {
+    setLabels([...labels, newLabel]);
+  };
+
+  const selectLabel = (label) => {
+    setSelectedLabel(label);
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <Sidebar labels={labels} addLabel={addLabel} selectLabel={selectLabel} />
+      <MainSection selectedLabel={selectedLabel} />
       </header>
+      
     </div>
   );
 }
